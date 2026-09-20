@@ -52,7 +52,7 @@ Propulsion system failures during flight lead to catastrophic outcomes:
    ┌────────────────────────────────────────────────────────────────────────────────┐
    │                               DRONANETRA PLATFORM                              │
    │                                                                                │
-   │  [Physical Engine] ──(CAN/ECU)──► [Physics Engine + PINN] ──► [Digital Twin]  │
+   │  [Physical Engine] ──(CAN/ECU)──► [Physics Engine + PINN] ──► [Digital Twin]   │
    │                                           │                         │          │
    │                                    (Real-Time Sync)          (What-If Sim)     │
    │                                           ▼                         ▼          │
@@ -84,7 +84,7 @@ The system is structured as an **end-to-end 5-layer industrial architecture**:
 ```
  ┌──────────────────────────────────────────────────────────────────────────────────┐
  │                         5. GROUND CONTROL STATION (GCS)                          │
- │  Skeuomorphic Avionics UI • 3D CAD Twin • FFT Spectrum • What-If Sim • Replay   │
+ │  Skeuomorphic Avionics UI • 3D CAD Twin • FFT Spectrum • What-If Sim • Replay    │
  └────────────────────────────────────────▲─────────────────────────────────────────┘
                                           │ Real-Time WebSocket (50Hz) / REST API
  ┌────────────────────────────────────────┴─────────────────────────────────────────┐
@@ -99,7 +99,7 @@ The system is structured as an **end-to-end 5-layer industrial architecture**:
                                           │ Synchronized Physical + Virtual State
  ┌────────────────────────────────────────┴─────────────────────────────────────────┐
  │                     2. DIGITAL TWIN & THERMODYNAMIC CORE                         │
- │  Otto/Diesel Cycle • CHT/EGT Heat Transfer • Volumetric Eff • Friction Losses   │
+ │  Otto/Diesel Cycle • CHT/EGT Heat Transfer • Volumetric Eff • Friction Losses    │
  └────────────────────────────────────────▲─────────────────────────────────────────┘
                                           │ Cleaned, Normalized Multi-Modal Vectors
  ┌────────────────────────────────────────┴─────────────────────────────────────────┐
