@@ -1,0 +1,1676 @@
+/* ==========================================================================
+   VRDE 180HP 3D DIGITAL TWIN & AERO ENGINE VIEWER — STANDALONE STYLESHEET
+   Self-contained styling for 3D Viewport, HUD, Controls & Thermal Overlays
+   ========================================================================== */
+
+:root {
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+  --accent-amber: #f59e0b;
+  --accent-gold: #d97706;
+  --accent-bronze: #df9244;
+  --accent-red: #ff3333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes jewelPulse {
+  0%   { opacity: 0.8; transform: scale(0.95); }
+  50%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.8; transform: scale(0.95); }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   VRDE 180HP 3D DIGITAL TWIN CHASSIS & INTERACTIVE VIEWPORT
+   ══════════════════════════════════════════════════════════════════ */
+.vrde-3d-digital-twin-chassis {
+  position: relative;
+  background: url('/brushed_metal_bg.png') center center / cover no-repeat;
+  border: 1.5px solid #64748b;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.vrde-3d-digital-twin-chassis.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  border-radius: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ── Top Tactical Header ── */
+.vrde-3d-top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: 
+    linear-gradient(180deg, rgba(8, 12, 20, 0.72) 0%, rgba(10, 14, 24, 0.84) 100%),
+    url('/dark_line_graph_bg.jpg') center center / cover no-repeat;
+  border-bottom: 1.5px solid #1a273c;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 5;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.vrde-badge-logo {
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+  color: #030a12;
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+.vrde-title-block h4 {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.vrde-title-block span {
+  font-size: 0.66rem;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.firing-order-ticker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(4, 8, 14, 0.85);
+  border: 1px solid #1a2434;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+.firing-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #64748b;
+  letter-spacing: 0.06em;
+}
+
+.firing-sequence {
+  display: flex;
+  gap: 6px;
+}
+
+.firing-cell {
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #475569;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: #090e17;
+  border: 1px solid #121d2d;
+  transition: all 0.15s ease;
+}
+
+.firing-cell.active-flash {
+  color: #05080f;
+  background: #ff7700;
+  border-color: #ff9900;
+  box-shadow: 0 0 10px rgba(255, 119, 0, 0.8);
+  font-weight: 900;
+  transform: scale(1.08);
+}
+
+.engine-rpm-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1.2px solid rgba(245, 158, 11, 0.35);
+  padding: 4px 12px;
+  border-radius: 6px;
+  color: #f59e0b;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+}
+
+.btn-tactical-icon {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1.2px solid #28374d;
+  color: #94a3b8;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-tactical-icon:hover {
+  background: #1e293b;
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.btn-tactical-icon.active {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-color: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+}
+
+/* ── 3D Canvas Viewport ── */
+.vrde-viewport-canvas {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  background: url('/brushed_metal_bg.png') center center / cover no-repeat;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.vrde-3d-digital-twin-chassis.fullscreen .vrde-viewport-canvas {
+  height: calc(100vh - 160px);
+}
+
+.vrde-hover-tooltip {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(6, 11, 20, 0.92);
+  border: 1.5px solid #f59e0b;
+  padding: 6px 18px;
+  border-radius: 6px;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.tooltip-name {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}
+
+.tooltip-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #f59e0b;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SLEEK COCKPIT 3D CAMERA ORIENTATION KEYCAP PANEL
+   ══════════════════════════════════════════════════════════════════ */
+.vrde-camera-preset-panel {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 15;
+  width: 126px;
+  padding: 4px;
+  background: linear-gradient(180deg, #222428 0%, #1a1b1e 50%, #131416 100%);
+  border: 1.5px solid #3c4046;
+  border-radius: 6px;
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+/* Stack of Buttons */
+.vrde-cam-buttons-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+
+/* Base Camera Button (Dark Tactile Keycap) */
+.dt-cam-btn {
+  position: relative;
+  width: 100%;
+  padding: 5px 3px;
+  background: linear-gradient(180deg, #2d3034 0%, #232528 50%, #1a1c1e 100%);
+  border: 1px solid #141517;
+  border-top: 1px solid #43464c;
+  border-bottom: 1px solid #0f1012;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.12s ease;
+  outline: none;
+}
+
+.dt-cam-btn-text {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #d6d9df;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.dt-cam-btn:hover:not(.active-keycap) {
+  background: linear-gradient(180deg, #3a3d42 0%, #2e3034 50%, #232528 100%);
+  border-top: 1px solid #585c64;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+    0 2px 5px rgba(0, 0, 0, 0.45);
+}
+
+.dt-cam-btn:hover:not(.active-keycap) .dt-cam-btn-text {
+  color: #ffffff;
+}
+
+.dt-cam-btn:active:not(.active-keycap) {
+  transform: translateY(1px);
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Active State: Soft Pale Military Sage / Ivory Illuminated Keycap */
+.dt-cam-btn.active-keycap {
+  background: linear-gradient(180deg, #e4e7d8 0%, #d4dac9 45%, #c2c9b7 100%);
+  border: 1px solid #949e89;
+  border-top: 1px solid #f4f6ee;
+  border-bottom: 1px solid #757e6c;
+  border-radius: 5px;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.35);
+  padding: 6px 4px;
+  cursor: default;
+}
+
+.dt-cam-btn.active-keycap .dt-cam-btn-text {
+  color: #161c18;
+  font-weight: 900;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.plaque-rivet.riv-bl { bottom: 2px; left: 2.5px; }
+.plaque-rivet.riv-br { bottom: 2px; right: 2.5px; }
+
+.cad-dimension-badge-hud {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(6, 12, 22, 0.88);
+  border: 1.5px solid #f59e0b;
+  border-radius: 8px;
+  padding: 8px 14px;
+  backdrop-filter: blur(8px);
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.25);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.cad-dim-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #f59e0b;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.cad-dim-val {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.cad-dim-sub {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #94a3b8;
+  font-family: var(--font-mono);
+}
+
+.vrde-view-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: #475569;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  background: rgba(3, 7, 12, 0.7);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Floating Component Diagnostic HUD Card ── */
+.component-diagnostic-hud-card {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 360px;
+  max-width: calc(100vw - 36px);
+  background: linear-gradient(145deg, rgba(8, 14, 24, 0.92) 0%, rgba(12, 18, 30, 0.95) 100%), url('/brushed_metal_bg.png') center / cover no-repeat;
+  border: 1.5px solid #f59e0b;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 24px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+  padding: 16px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.hud-header-strip {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid #1a2538;
+  padding-bottom: 10px;
+}
+
+.hud-status-jewel {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.jewel-green {
+  background: #d97706;
+  box-shadow: 0 0 8px #d97706;
+}
+
+.jewel-amber {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.jewel-red {
+  background: #ff2222;
+  box-shadow: 0 0 10px #ff2222;
+  animation: jewelPulse 1s infinite ease-in-out;
+}
+
+.hud-tag-sub {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #f59e0b;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+.hud-component-title {
+  margin: 2px 0 0 0;
+  font-size: 0.96rem;
+  font-weight: 900;
+  color: #f1f5f9;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.hud-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.hud-close-btn:hover {
+  background: rgba(255, 34, 34, 0.2);
+  color: #ff4444;
+  border-color: #ff4444;
+}
+
+.hud-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.hud-metric-box {
+  background: rgba(14, 20, 32, 0.85);
+  border: 1px solid #1a2538;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.hud-metric-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+
+.hud-metric-val-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.hud-metric-number {
+  font-size: 1.05rem;
+  font-weight: 900;
+  font-family: var(--font-mono);
+}
+
+.text-green { color: #fbbf24; }
+.text-amber { color: #f59e0b; }
+.text-red { color: #ff3b3b; }
+.text-cyan { color: #f59e0b; }
+
+.hud-badge-pill {
+  font-size: 0.62rem;
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.badge-green { background: rgba(217, 119, 6, 0.15); color: #fbbf24; border: 1px solid #d97706; }
+.badge-amber { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; }
+.badge-red { background: rgba(255, 34, 34, 0.2); color: #ff3b3b; border: 1px solid #ff3b3b; }
+
+.hud-range-sub {
+  font-size: 0.58rem;
+  color: #64748b;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.hud-desc-box p {
+  margin: 0;
+  font-size: 0.73rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+.hud-sensors-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hud-subhead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #8da2b5;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+.hud-sensor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.hud-sensor-tag {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  font-size: 0.6rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.hud-anomaly-alert {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: #f59e0b;
+}
+
+.alert-critical {
+  background: rgba(255, 34, 34, 0.16);
+  border-color: #ff3333;
+  box-shadow: 0 0 12px rgba(255, 34, 34, 0.25);
+}
+
+.hud-predictive-box {
+  background: rgba(14, 20, 32, 0.9);
+  border: 1px solid #1a2538;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.hud-predictive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.hud-prob-bar-track {
+  width: 100%;
+  height: 5px;
+  background: #1e293b;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.hud-prob-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.hud-action-box {
+  background: rgba(250, 204, 21, 0.06);
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.hud-action-text {
+  margin: 4px 0 0 0;
+  font-size: 0.72rem;
+  color: #fef08a;
+  line-height: 1.35;
+}
+
+.hud-btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-hud-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+  color: #030810;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  letter-spacing: 0.04em;
+  transition: all 0.15s ease;
+}
+
+.btn-hud-primary:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+}
+
+.btn-hud-secondary {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid #334155;
+  color: #94a3b8;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-hud-secondary:hover {
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.btn-hud-secondary.active {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SKEUOMORPHIC DUAL-TIER CONTROL CHASSIS (DIAGNOSTICS & ANOMALY SIM)
+   ══════════════════════════════════════════════════════════════════ */
+.vrde-dual-control-chassis {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #111316;
+  border-top: 2px solid #5a5344;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.65);
+  z-index: 10;
+  user-select: none;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SKEUOMORPHIC DUAL-TIER CONTROL CHASSIS (DIAGNOSTICS & ANOMALY SIM)
+   ══════════════════════════════════════════════════════════════════ */
+.vrde-dual-control-chassis {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #111316;
+  border-top: 2px solid #5a5344;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.65);
+  z-index: 10;
+  user-select: none;
+}
+
+/* ── Tier 1: Brushed Metal Diagnostic Modes & Exploded Slider ── */
+.vrde-diag-deck-tier {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  background: url('/brushed_metal_bg.png') center center / cover no-repeat;
+  border-bottom: 2px solid #3c4046;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.25);
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+
+/* Corner Screws for Tier 1 */
+.deck-corner-screw {
+  position: absolute;
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #94a3b8 50%, #475569 100%);
+  border: 0.8px solid #334155;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5), inset 0 0.5px 0.5px rgba(255,255,255,0.7);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.deck-corner-screw::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 0.8px;
+  background: #1e293b;
+  transform: translate(-50%, -50%) rotate(42deg);
+}
+
+.deck-corner-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 0.8px;
+  background: #1e293b;
+  transform: translate(-50%, -50%) rotate(-48deg);
+}
+
+.deck-screw-tl { top: 3px; left: 4px; }
+.deck-screw-tr { top: 3px; right: 4px; }
+.deck-screw-bl { bottom: 3px; left: 4px; }
+.deck-screw-br { bottom: 3px; right: 4px; }
+
+/* Diagnostic Modes Container */
+.diag-modes-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.diag-modes-container::-webkit-scrollbar { display: none; }
+
+.deck-industrial-label {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.69rem;
+  font-weight: 900;
+  color: #242932;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.diag-modes-button-row {
+  display: flex;
+  align-items: center;
+  gap: 4.5px;
+}
+
+/* Base Light Metallic Diagnostic Button */
+.btn-diag-tier1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5.5px 8px;
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 45%, #cbd5e1 100%);
+  border: 1px solid #94a3b8;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #64748b;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  transition: all 0.12s ease;
+}
+
+.btn-diag-tier1 .diag-btn-icon {
+  color: #2b323c;
+  flex-shrink: 0;
+}
+
+.btn-diag-tier1 .diag-btn-text {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.67rem;
+  font-weight: 800;
+  color: #1e242d;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-diag-tier1:hover:not(.active-sage-keycap) {
+  background: linear-gradient(180deg, #ffffff 0%, #edf2f7 45%, #d8e0ea 100%);
+  border-top: 1px solid #ffffff;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.18),
+    0 3px 6px rgba(0, 0, 0, 0.22);
+}
+
+.btn-diag-tier1:active:not(.active-sage-keycap) {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Active Diagnostic Mode: Soft Pale Sage / Ivory Illuminated Keycap */
+.btn-diag-tier1.active-sage-keycap {
+  background: linear-gradient(180deg, #e4e7d8 0%, #d4dac9 45%, #c2c9b7 100%);
+  border: 1px solid #949e89;
+  border-top: 1px solid #f4f6ee;
+  border-bottom: 1px solid #757e6c;
+  border-radius: 5px;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.35);
+  cursor: default;
+}
+
+.btn-diag-tier1.active-sage-keycap .diag-btn-icon {
+  color: #161c18;
+}
+
+.btn-diag-tier1.active-sage-keycap .diag-btn-text {
+  color: #161c18;
+  font-weight: 900;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Exploded View Slider Section (Right) */
+.exploded-slider-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-left: 12px;
+  border-left: 1.5px solid #a3abb7;
+}
+
+.exploded-slider-track-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Machined Inset Slider Track & Steel Thumb */
+.vrde-machined-slider {
+  -webkit-appearance: none;
+  width: 140px;
+  height: 8px;
+  background: linear-gradient(180deg, #0e1114 0%, #1e2328 100%);
+  border: 1px solid #2d333b;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #5a626d;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
+  outline: none;
+  cursor: pointer;
+}
+
+.vrde-machined-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #cbd5e1 45%, #64748b 80%, #334155 100%);
+  border: 1.2px solid #1e293b;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.vrde-machined-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.exploded-percentage-readout {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #1a202c;
+  min-width: 34px;
+  text-align: right;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* ── Tier 2: Debossed Gunmetal Physical Anomaly Simulation Injector ── */
+.vrde-anomaly-sim-tier {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 7px 18px;
+  background: 
+    linear-gradient(180deg, #1c1d20 0%, #131416 50%, #0c0d0e 100%),
+    url('/brushed_metal_bg.png') center / cover no-repeat;
+  border-top: 1.5px solid #08090a;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.95);
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.vrde-anomaly-sim-tier::-webkit-scrollbar { display: none; }
+
+/* Corner Screws for Tier 2 */
+.sim-corner-screw {
+  position: absolute;
+  width: 5.5px;
+  height: 5.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #94a3b8 0%, #475569 50%, #1e293b 100%);
+  border: 0.8px solid #0f172a;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.8), inset 0 0.5px 0.5px rgba(255,255,255,0.4);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sim-corner-screw::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.5px;
+  height: 0.7px;
+  background: #0f172a;
+  transform: translate(-50%, -50%) rotate(38deg);
+}
+
+.sim-corner-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.5px;
+  height: 0.7px;
+  background: #0f172a;
+  transform: translate(-50%, -50%) rotate(-52deg);
+}
+
+.sim-screw-tl { top: 2px; left: 4px; }
+.sim-screw-tr { top: 2px; right: 4px; }
+.sim-screw-bl { bottom: 2px; left: 4px; }
+.sim-screw-br { bottom: 2px; right: 4px; }
+
+.anomaly-injector-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.anomaly-warning-icon {
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+}
+
+.anomaly-injector-title {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.71rem;
+  font-weight: 900;
+  color: #f59e0b;
+  letter-spacing: 0.07em;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.5), 0 1px 2px #000000;
+  white-space: nowrap;
+}
+
+.anomaly-buttons-track {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+/* Base Dark Anomaly Button */
+.btn-anomaly-tier2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  background: linear-gradient(180deg, #2c2e32 0%, #202225 50%, #17181a 100%);
+  border: 1px solid #0f1011;
+  border-top: 1px solid #43464c;
+  border-bottom: 1px solid #08090a;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  transition: all 0.12s ease;
+}
+
+.btn-anomaly-tier2 .anomaly-btn-icon {
+  color: #8a92a0;
+  flex-shrink: 0;
+}
+
+.btn-anomaly-tier2 .anomaly-btn-text {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.67rem;
+  font-weight: 800;
+  color: #c4cad4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
+}
+
+.btn-anomaly-tier2:hover:not(.active-copper-keycap):not(.active-sage-keycap) {
+  background: linear-gradient(180deg, #3a3d42 0%, #2a2c30 50%, #1e2023 100%);
+  border-top: 1px solid #585c64;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+    0 2px 5px rgba(0, 0, 0, 0.45);
+}
+
+.btn-anomaly-tier2:hover:not(.active-copper-keycap):not(.active-sage-keycap) .anomaly-btn-text {
+  color: #ffffff;
+}
+
+.btn-anomaly-tier2:active:not(.active-copper-keycap):not(.active-sage-keycap) {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Active Nominal Keycap (Sage/Ivory) */
+.btn-anomaly-tier2.active-sage-keycap {
+  background: linear-gradient(180deg, #e4e7d8 0%, #d4dac9 45%, #c2c9b7 100%);
+  border: 1px solid #949e89;
+  border-top: 1px solid #f4f6ee;
+  border-bottom: 1px solid #757e6c;
+  border-radius: 5px;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.35);
+  cursor: default;
+}
+
+.btn-anomaly-tier2.active-sage-keycap .anomaly-btn-icon,
+.btn-anomaly-tier2.active-sage-keycap .anomaly-btn-text {
+  color: #161c18;
+  font-weight: 900;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Active Fault/Hazard Keycap: Deep Burnished Copper / Amber Glowing Keycap */
+.btn-anomaly-tier2.active-copper-keycap {
+  background: linear-gradient(180deg, #7c2d12 0%, #581c0c 50%, #3e1207 100%);
+  border: 1.2px solid #c2410c;
+  border-top: 1.2px solid #ea580c;
+  border-bottom: 1.2px solid #431407;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.7),
+    0 0 12px rgba(234, 88, 12, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.btn-anomaly-tier2.active-copper-keycap .anomaly-btn-icon {
+  color: #fed7aa;
+  filter: drop-shadow(0 0 4px #ea580c);
+}
+
+.btn-anomaly-tier2.active-copper-keycap .anomaly-btn-text {
+  color: #fed7aa;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 119, 0, 0.6);
+}
+
+
+
+
+
+
+/* ==========================================================================
+   X-RAY THERMAL GLOW & SPATIAL TELEMETRY OVERLAYS
+   ========================================================================== */
+
+.xray-thermal-spatial-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  overflow: hidden;
+}
+
+.xray-top-controls-bar {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(5, 9, 16, 0.88);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 14px rgba(245, 158, 11, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: 8px;
+  z-index: 20;
+}
+
+.xray-mode-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #f59e0b;
+  letter-spacing: 0.06em;
+  padding-right: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.xray-filter-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.xray-filter-buttons .filter-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #64748b;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.btn-xray-filter {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+  font-size: 0.62rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.btn-xray-filter:hover {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
+.btn-xray-filter.active {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #f59e0b;
+  color: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+}
+
+/* ── Spatial Floating Badges ── */
+.xray-floating-badge {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  z-index: 18;
+  cursor: pointer;
+  margin-top: -10px;
+  transition: transform 0.1s ease-out;
+  user-select: none;
+}
+
+.xray-floating-badge:hover {
+  transform: translate(-50%, -105%) scale(1.04);
+  z-index: 25;
+}
+
+.xray-badge-inner {
+  background: rgba(4, 8, 15, 0.92);
+  border-radius: 8px;
+  padding: 8px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 155px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75);
+}
+
+/* Critical Glow (Cyl 3 Overheat) */
+.badge-critical-glow .xray-badge-inner {
+  border: 1.5px solid #ff1a35;
+  box-shadow: 0 0 16px rgba(255, 26, 53, 0.5), 0 8px 24px rgba(0, 0, 0, 0.8);
+  animation: badgeThermalThrob 1.2s infinite ease-in-out;
+}
+
+@keyframes badgeThermalThrob {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(255, 26, 53, 0.4), 0 8px 24px rgba(0, 0, 0, 0.8);
+    border-color: #ff1a35;
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(255, 26, 53, 0.85), 0 8px 30px rgba(255, 0, 43, 0.3);
+    border-color: #ff6b81;
+  }
+}
+
+/* Plasma Glow (Exhaust) */
+.badge-plasma-glow .xray-badge-inner {
+  border: 1.5px solid #f59e0b;
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.55), 0 8px 24px rgba(0, 0, 0, 0.8);
+}
+
+/* Warning Glow */
+.badge-warning-glow .xray-badge-inner {
+  border: 1.5px solid #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.35);
+}
+
+/* Nominal Glow */
+.badge-nominal-glow .xray-badge-inner {
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.18);
+}
+
+/* Anchor pointer dot below badge */
+.xray-badge-anchor-dot {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.xray-badge-anchor-dot.anchor-critical {
+  background: #ff1a35;
+  box-shadow: 0 0 10px #ff1a35;
+}
+
+.xray-badge-anchor-dot.anchor-plasma {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+}
+
+.xray-badge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.xray-badge-name {
+  font-size: 0.66rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.xray-badge-status {
+  font-size: 0.56rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+.status-nom {
+  background: rgba(217, 119, 6, 0.16);
+  color: #fbbf24;
+  border: 1px solid rgba(217, 119, 6, 0.4);
+}
+
+.status-warn {
+  background: rgba(245, 158, 11, 0.18);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.status-crit {
+  background: rgba(255, 26, 53, 0.25);
+  color: #ff3b3b;
+  border: 1px solid #ff1a35;
+  animation: badgeStatusBlink 1s infinite alternate;
+}
+
+@keyframes badgeStatusBlink {
+  from { opacity: 0.8; }
+  to { opacity: 1; filter: brightness(1.25); }
+}
+
+.xray-badge-temp-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 1px;
+}
+
+.temp-display {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.temp-value {
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+.pulse-flame {
+  animation: flamePulse 0.9s infinite alternate;
+}
+
+@keyframes flamePulse {
+  from { transform: scale(1); filter: drop-shadow(0 0 2px currentColor); }
+  to { transform: scale(1.3); filter: drop-shadow(0 0 6px currentColor); }
+}
+
+.glow-meter-block {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 0.60rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.glow-label {
+  color: #64748b;
+}
+
+.glow-value {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.xray-glow-bar-track {
+  width: 100%;
+  height: 3.5px;
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.xray-glow-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.xray-badge-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.60rem;
+  font-family: var(--font-mono);
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 4px;
+  margin-top: 1px;
+}
+
+.sec-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.sec-val {
+  color: #cbd5e1;
+  font-weight: 700;
+}
+
+/* ── Bottom-Left X-Ray Thermal Glow Scale & Legend ── */
+.xray-thermal-legend-card {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: linear-gradient(145deg, rgba(8, 14, 24, 0.92) 0%, rgba(12, 18, 30, 0.95) 100%), url('/brushed_metal_bg.png') center / cover no-repeat;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 16px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  padding: 10px 14px;
+  z-index: 20;
+  min-width: 320px;
+  max-width: 440px;
+}
+
+.legend-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.legend-title {
+  font-size: 0.66rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #f1f5f9;
+  letter-spacing: 0.05em;
+}
+
+.legend-gradient-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #1e293b 0%, #475569 16%, #cd7f32 32%, #d97706 50%, #f59e0b 68%, #ea580c 82%, #ff1a35 92%, #ffffff 100%);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+  margin-bottom: 6px;
+}
+
+.legend-scale-markers {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.scale-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-mono);
+}
+
+.stop-temp {
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.stop-glow {
+  font-size: 0.54rem;
+  font-weight: 700;
+  color: #f59e0b;
+  letter-spacing: 0.02em;
+}
+
+.stop-sub {
+  font-size: 0.48rem;
+  color: #64748b;
+  font-weight: 600;
+  text-align: center;
+}
+
+.legend-footer-rule {
+  margin-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 5px;
+  font-size: 0.54rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #f59e0b;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ── 3D Outside Text Callout Data Boxes Layer ── */
+.vrde-callout-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+  overflow: hidden;
+}
+
+.vrde-callout-card {
+  position: absolute;
+  pointer-events: auto;
+  background: linear-gradient(135deg, rgba(8, 14, 25, 0.92) 0%, rgba(5, 9, 18, 0.95) 100%), url('/brushed_metal_bg.png') center / cover no-repeat;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.2px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), 0 0 15px rgba(245, 158, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 220px;
+  max-width: 280px;
+  color: #f8fafc;
+  font-family: var(--font-mono, monospace);
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+  z-index: 20;
+}
+
+.vrde-callout-card.critical {
+  border-color: #ef4444;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), 0 0 20px rgba(239, 68, 68, 0.35);
+  animation: calloutCriticalPulse 2s infinite ease-in-out;
+}
+
+.vrde-callout-card.warning {
+  border-color: #f59e0b;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), 0 0 18px rgba(245, 158, 11, 0.3);
+  animation: calloutWarningPulse 2.5s infinite ease-in-out;
+}
+
+.vrde-callout-card.nominal {
+  border-color: rgba(217, 119, 6, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65), 0 0 12px rgba(217, 119, 6, 0.2);
+}
+
+@keyframes calloutCriticalPulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), 0 0 14px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85), 0 0 28px rgba(239, 68, 68, 0.6);
+  }
+}
+
+@keyframes calloutWarningPulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), 0 0 12px rgba(245, 158, 11, 0.25);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85), 0 0 24px rgba(245, 158, 11, 0.5);
+  }
+}
+
+.callout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.callout-title {
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #f59e0b;
+}
+
+.callout-badge {
+  font-size: 0.52rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+}
+
+.callout-badge.critical {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ff4d6d;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.callout-badge.warning {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}
+
+.callout-badge.nominal {
+  background: rgba(217, 119, 6, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(217, 119, 6, 0.4);
+}
+
+.callout-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.58rem;
+  line-height: 1.35;
+}
+
+.callout-metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.callout-metric-label {
+  color: #94a3b8;
+}
+
+.callout-metric-val {
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.callout-action-row {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  font-size: 0.52rem;
+  color: #f59e0b;
+  line-height: 1.3;
+}

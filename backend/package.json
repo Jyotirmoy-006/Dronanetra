@@ -1,0 +1,23 @@
+{
+  "name": "male-uav-digital-twin-backend",
+  "version": "0.1.0",
+  "description": "FastAPI AI-enabled Digital Twin Backend Service for Aero Piston Engine Monitoring",
+  "private": true,
+  "scripts": {
+    "start": "python -m uvicorn app.main:app --host 0.0.0.0 --port 8000",
+    "dev": "python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload",
+    "train": "python ../scripts/training/verify_and_train_all_datasets.py",
+    "generate-data": "python ../scripts/data_generation/generate_synthetic_data.py",
+    "test": "pytest"
+  },
+  "keywords": [
+    "digital-twin",
+    "piston-engine",
+    "fastapi",
+    "machine-learning",
+    "rul-prediction",
+    "uav"
+  ],
+  "author": "Aero Digital Twin Team",
+  "license": "MIT"
+}

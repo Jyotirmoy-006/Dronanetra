@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRDO | Secure Defence Access</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            overflow: hidden;
+            font-family: 'Rajdhani', sans-serif;
+            user-select: none;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.fade-out-page {
+            opacity: 0;
+        }
+
+        .screen-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+        }
+
+        /* Hangar Aircraft Image displayed directly */
+        .hangar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* Ultra Pure Crystal Glass Card */
+        .glass-loader-card {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 680px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-top: 1.2px solid rgba(255, 255, 255, 0.65);
+            border-radius: 12px;
+            padding: 16px 28px 18px 28px;
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.35),
+                0 4px 16px rgba(0, 0, 0, 0.12);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            z-index: 100;
+        }
+
+        /* Engraved Title "BUILDING A SAFER TOMORROW" */
+        .loader-headline {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16.5px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #0f172a;
+            text-transform: uppercase;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9), 0 0 10px rgba(255, 255, 255, 0.5);
+            line-height: 1;
+            text-align: center;
+        }
+
+        /* Progress Bar Outer Track */
+        .tricolor-track {
+            position: relative;
+            width: 100%;
+            height: 6.5px;
+            background: rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3-Color Indian Flag Progress Bar Fill (Saffron | White | Green) */
+        .tricolor-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 4px;
+            background: linear-gradient(
+                to right,
+                #FF9933 0%,
+                #FF9933 33.333%,
+                #FFFFFF 33.333%,
+                #FFFFFF 66.666%,
+                #138808 66.666%,
+                #138808 100%
+            );
+            background-repeat: no-repeat;
+            background-size: 624px 100%;
+            box-shadow: 0 0 10px rgba(255, 153, 51, 0.5), 0 0 10px rgba(19, 136, 8, 0.5);
+            transition: width 0.04s linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-container" id="loading-container">
+        <!-- Exact Direct Image -->
+        <img src="/static/img/hangar_loading_bg.jpg?v=7.0" alt="DRDO Hangar" class="hangar-img">
+
+        <!-- Glass Card with Indian Tricolor Progress Bar -->
+        <div class="glass-loader-card">
+            <div class="loader-headline">BUILDING A SAFER TOMORROW</div>
+            <div class="tricolor-track" id="track-container">
+                <div class="tricolor-fill" id="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const track = document.getElementById('track-container');
+        const fill = document.getElementById('progress-fill');
+
+        function updateBackgroundSize() {
+            if (track && fill) {
+                fill.style.backgroundSize = `${track.offsetWidth}px 100%`;
+            }
+        }
+        window.addEventListener('resize', updateBackgroundSize);
+        updateBackgroundSize();
+
+        let progress = 0;
+        // Total duration: 3.8 seconds so user can feel the loading experience
+        const totalDurationMs = 3800;
+        const tickIntervalMs = 40;
+        const totalTicks = totalDurationMs / tickIntervalMs;
+        const stepPerTick = 100 / totalTicks;
+
+        const interval = setInterval(() => {
+            let randomVariance = (Math.random() * 0.4) - 0.2;
+            progress += (stepPerTick + randomVariance);
+            updateBackgroundSize();
+
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                fill.style.width = '100%';
+
+                // Automatically navigate to /dashboard after reaching 100%
+                setTimeout(() => {
+                    document.body.classList.add('fade-out-page');
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 500);
+                }, 400);
+            } else {
+                fill.style.width = `${progress}%`;
+            }
+        }, tickIntervalMs);
+    </script>
+</body>
+</html>

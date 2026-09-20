@@ -1,0 +1,287 @@
+/* ==========================================================================
+   32-BIN VIBRATION FFT HARMONIC SPECTRUM — SKEUOMORPHIC INDUSTRIAL BARCHART
+   High-Fidelity Machined Dark Gunmetal & Forged Brushed Steel Spectrum Rack
+   ========================================================================== */
+
+.vibration-fft-chassis {
+  position: relative;
+  width: 100%;
+  min-height: 290px;
+  background: 
+    radial-gradient(ellipse at 50% 30%, rgba(45, 49, 56, 0.45) 0%, rgba(14, 16, 20, 0.95) 100%),
+    url('/brushed_metal_bg.png') center center / cover no-repeat;
+  border: 1.8px solid #3c4048;
+  border-top: 1.8px solid #565c68;
+  border-bottom: 2.2px solid #14161a;
+  border-radius: 8px;
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.8);
+  padding: 14px 18px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Top Left Amplitude Keycap Tab ── */
+.fft-amplitude-keycap-btn {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(180deg, #383c44 0%, #262930 50%, #1a1c22 100%);
+  border: 1.2px solid #4a505b;
+  border-top: 1.2px solid #6b7382;
+  border-bottom: 2px solid #0f1013;
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: #cbd5e1;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.fft-amplitude-keycap-btn:hover {
+  background: linear-gradient(180deg, #444852 0%, #2d313a 50%, #20232a 100%);
+  color: #f8fafc;
+  border-color: #5d6472;
+}
+
+.fft-amplitude-arrow {
+  font-size: 0.55rem;
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+/* ── Top Right Machined Bolted Plaque ── */
+.fft-bolted-plaque {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 10;
+  width: 145px;
+  background: 
+    linear-gradient(180deg, #2a2d33 0%, #1e2025 50%, #14161a 100%),
+    url('/brushed_metal_bg.png') center / cover no-repeat;
+  border: 1.5px solid #454a54;
+  border-top: 1.5px solid #636a78;
+  border-bottom: 2px solid #0d0e11;
+  border-radius: 6px;
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  padding: 6px 8px;
+}
+
+/* Plaque Hex Corner Screws */
+.plaque-screw {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #9aa0ac 0%, #3e424a 60%, #181a1f 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.8);
+  border: 0.8px solid #23262c;
+}
+
+.plaque-screw-tl { top: 3px; left: 3px; }
+.plaque-screw-tr { top: 3px; right: 3px; }
+.plaque-screw-bl { bottom: 3px; left: 3px; }
+.plaque-screw-br { bottom: 3px; right: 3px; }
+
+/* Inset Plaque Readout Display Area */
+.plaque-inset-screen {
+  background: #090b0e;
+  border: 1px solid #1c1f26;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plaque-stat-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.plaque-stat-label {
+  font-size: 0.52rem;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  color: #7d8492;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+}
+
+.plaque-stat-value {
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-family: var(--font-mono, monospace);
+  color: #e2d6be;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-shadow: 0 0 10px rgba(226, 214, 190, 0.25);
+}
+
+.plaque-stat-value.small {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  letter-spacing: 0.02em;
+  margin-top: 1px;
+}
+
+.plaque-divider {
+  height: 1px;
+  background: #181b22;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 3px 0;
+}
+
+/* ── Main SVG Spectrum Stage ── */
+.fft-spectrum-svg-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.fft-spectrum-svg {
+  width: 100%;
+  height: 250px;
+  overflow: visible;
+}
+
+/* Axis Typography */
+.fft-y-tick-text {
+  fill: #8c94a2;
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: end;
+  letter-spacing: 0.02em;
+}
+
+.fft-x-tick-text {
+  fill: #8c94a2;
+  font-family: var(--font-mono, monospace);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  letter-spacing: 0.01em;
+}
+
+/* Grid & Axis Lines */
+.fft-grid-line {
+  stroke: rgba(148, 163, 184, 0.12);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.fft-axis-line {
+  stroke: #47505f;
+  stroke-width: 1.2;
+}
+
+.fft-axis-tick {
+  stroke: #47505f;
+  stroke-width: 1.2;
+}
+
+/* ── Flat Matte Bars ── */
+.fft-steel-bar {
+  cursor: pointer;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.fft-steel-bar:hover {
+  filter: brightness(1.2);
+}
+
+.fft-steel-bar.peak-bar {
+  filter: brightness(1.08);
+}
+
+/* ── Bottom Right Frequency Unit Keycap Badge ── */
+.fft-bottom-freq-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  background: linear-gradient(180deg, #24262b 0%, #16171b 100%);
+  border: 1px solid #3d414a;
+  border-top: 1px solid #545a66;
+  border-bottom: 1.5px solid #0b0c0e;
+  border-radius: 3px;
+  padding: 2px 8px;
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* ── Hover Tooltip Card ── */
+.fft-hover-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(145deg, rgba(16, 20, 28, 0.96) 0%, rgba(8, 10, 15, 0.98) 100%);
+  border: 1.2px solid #5a6270;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 6px 10px;
+  z-index: 30;
+  transform: translate(-50%, -115%);
+  animation: fadeIn 0.12s ease-out;
+  min-width: 140px;
+}
+
+.fft-tooltip-title {
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  font-family: var(--font-mono, monospace);
+  border-bottom: 1px solid #282f3c;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+
+.fft-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.58rem;
+  font-family: var(--font-mono, monospace);
+  line-height: 1.35;
+}
+
+.fft-tooltip-label {
+  color: #94a3b8;
+}
+
+.fft-tooltip-val {
+  font-weight: 800;
+  color: #e2d6be;
+}

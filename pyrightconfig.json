@@ -1,0 +1,15 @@
+{
+  "include": [
+    "backend",
+    "face-attendance-system-master"
+  ],
+  "extraPaths": [
+    "face-attendance-system-master",
+    "face-attendance-system-master/Silent-Face-Anti-Spoofing",
+    "face-attendance-system-master/.venv/lib/python3.14/site-packages",
+    "backend",
+    "backend/.venv/lib/python3.14/site-packages"
+  ],
+  "venvPath": "face-attendance-system-master",
+  "venv": ".venv"
+}
