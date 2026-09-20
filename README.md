@@ -1,4 +1,4 @@
-# 🛡️ DRONANETRA (ड्रोननेत्र)
+# 🛡️ DRONANETRA
 ### AI-Enabled Real-Time Digital Twin System for Health Monitoring, Fault Prediction and Mission Reliability Enhancement of Aero Piston Engines in MALE UAVs
 
 ---
