@@ -1,0 +1,30 @@
+column,type,definition
+unit_number,integer,Engine/unit identifier; each time series represents one engine.
+cycle,integer,Operating cycle number.
+operational_setting_1,float,Operational setting 1 (NASA source column 3).
+operational_setting_2,float,Operational setting 2 (NASA source column 4).
+operational_setting_3,float,Operational setting 3 (NASA source column 5).
+sensor_1,float,Sensor measurement 1 (NASA source column 6).
+sensor_2,float,Sensor measurement 2 (NASA source column 7).
+sensor_3,float,Sensor measurement 3 (NASA source column 8).
+sensor_4,float,Sensor measurement 4 (NASA source column 9).
+sensor_5,float,Sensor measurement 5 (NASA source column 10).
+sensor_6,float,Sensor measurement 6 (NASA source column 11).
+sensor_7,float,Sensor measurement 7 (NASA source column 12).
+sensor_8,float,Sensor measurement 8 (NASA source column 13).
+sensor_9,float,Sensor measurement 9 (NASA source column 14).
+sensor_10,float,Sensor measurement 10 (NASA source column 15).
+sensor_11,float,Sensor measurement 11 (NASA source column 16).
+sensor_12,float,Sensor measurement 12 (NASA source column 17).
+sensor_13,float,Sensor measurement 13 (NASA source column 18).
+sensor_14,float,Sensor measurement 14 (NASA source column 19).
+sensor_15,float,Sensor measurement 15 (NASA source column 20).
+sensor_16,float,Sensor measurement 16 (NASA source column 21).
+sensor_17,float,Sensor measurement 17 (NASA source column 22).
+sensor_18,float,Sensor measurement 18 (NASA source column 23).
+sensor_19,float,Sensor measurement 19 (NASA source column 24).
+sensor_20,float,Sensor measurement 20 (NASA source column 25).
+sensor_21,float,Sensor measurement 21 (NASA source column 26).
+RUL,integer,Remaining useful life in cycles. Training: max cycle of that engine minus current cycle. Test: official terminal RUL plus cycles from current row to final observed cycle.
+split,categorical,train or test.
+dataset,categorical,"FD001, FD002, FD003, or FD004 when source file is available."

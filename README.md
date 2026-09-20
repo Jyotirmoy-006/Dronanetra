@@ -4,6 +4,8 @@
 ---
 
 **Smart India Hackathon (SIH) | Problem Statement ID:** `26054`  
+**Team Name:** `AlgoX.6`  
+**Team ID:** `145605`  
 **Ministry / Organization:** Ministry of Defence / DRDO / Department of Defence Production  
 **Domain:** Artificial Intelligence, Digital Twins, Aerospace Propulsion, Predictive Maintenance, Ground Control Systems (GCS)  
 
@@ -445,12 +447,12 @@ npm run build
 ## 📄 License & Acknowledgments
 
 - **License:** Open for academic, defence research, and hackathon evaluation under the **MIT License**.
-- **Developed for:** Smart India Hackathon (SIH) — Problem Statement `26054`.
+- **Developed by:** Team **AlgoX.6** (Team ID: `145605`) for **Smart India Hackathon (SIH)** — Problem Statement `26054`.
 - **Inspiration:** DRDO / ADE TAPAS-BH-201 MALE UAV Propulsion Architecture.
 
 ---
 
 <div align="center">
-  <b>DRONANETRA • BUILDING A SAFER TOMORROW 🇮🇳</b><br>
-  <i>Indigenous AI-Powered Aero Propulsion Digital Twin</i>
+  <b>DRONANETRA • Developed by Team AlgoX.6 (Team ID: 145605)</b><br>
+  <i>Indigenous AI-Powered Aero Propulsion Digital Twin • SIH PS 26054</i>
 </div>

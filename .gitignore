@@ -28,15 +28,9 @@ build/
 *.local
 .env.*.local
 
-# Large temporary datasets & model checkpoints
-data/raw/*
-data/synthetic/*
-data/processed/*
-data/benchmark/*
-!data/**/.gitkeep
-models/saved_models/*
+# Large checkpoints (keep datasets and saved models tracked)
 models/checkpoints/*
-!models/**/.gitkeep
+!models/checkpoints/.gitkeep
 
 # Editors / OS / IDE
 .vscode/
