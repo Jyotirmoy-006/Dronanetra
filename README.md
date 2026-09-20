@@ -151,7 +151,7 @@ The system is structured as an **end-to-end 5-layer industrial architecture**:
 ### C. AI/ML Anomaly Detection & Fault Classifier
 *Location:* [`backend/app/ai_models/`](file:///C:/piston%20engine%203/backend/app/ai_models/)
 
-1. **Deep Autoencoder & Isolation Forest**:
+1. **Isolation Forest**:
    - Unsupervised neural compression reconstructs normal operating manifolds.
    - Reconstruction error exceeding dynamic dynamic threshold classifies instantaneous anomalies.
 
